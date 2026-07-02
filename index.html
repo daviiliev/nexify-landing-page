@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nexify · 2025 startup</title>
+  <!-- Font & icons (clean, modern) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    /* ----- reset & base ----- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f9fcff;
+      color: #0b1a33;
+      line-height: 1.6;
+      scroll-behavior: smooth;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ----- sticky nav ----- */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      box-shadow: 0 4px 20px rgba(0, 20, 50, 0.04);
+      border-bottom: 1px solid rgba(0, 80, 200, 0.06);
+      transition: box-shadow 0.2s;
+    }
+
+    .nav-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 0;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: #0b2b5c;
+    }
+    .logo i {
+      color: #1a6aff;
+      margin-right: 6px;
+    }
+    .logo span {
+      color: #1a6aff;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 40px;
+      list-style: none;
+      font-weight: 500;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: #1f3a6b;
+      font-size: 0.95rem;
+      transition: color 0.2s;
+      position: relative;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: #1a6aff;
+      transition: width 0.25s;
+    }
+    .nav-links a:hover {
+      color: #0b2b5c;
+    }
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .nav-cta {
+      background: #1a6aff;
+      color: white !important;
+      padding: 10px 24px;
+      border-radius: 60px;
+      font-weight: 600;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .nav-cta::after { display: none !important; }
+    .nav-cta:hover {
+      background: #0e4fd0 !important;
+      transform: scale(1.02);
+      color: white !important;
+    }
+
+    /* mobile menu */
+    .menu-toggle {
+      display: none;
+      font-size: 1.8rem;
+      background: none;
+      border: none;
+      color: #0b2b5c;
+      cursor: pointer;
+    }
+
+    /* ----- hero ----- */
+    .hero {
+      padding: 80px 0 100px;
+      text-align: center;
+    }
+    .hero h1 {
+      font-size: 3.8rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      max-width: 900px;
+      margin: 0 auto 24px;
+      background: linear-gradient(145deg, #0b2b5c, #1a6aff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero p {
+      font-size: 1.3rem;
+      color: #2e4a7a;
+      max-width: 600px;
+      margin: 0 auto 40px;
+      font-weight: 400;
+    }
+    .hero-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      background: #1a6aff;
+      color: white;
+      padding: 14px 44px;
+      border-radius: 60px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+      display: inline-block;
+      box-shadow: 0 8px 24px rgba(26, 106, 255, 0.25);
+    }
+    .btn-primary:hover {
+      background: #0e4fd0;
+      transform: translateY(-2px);
+    }
+    .btn-outline {
+      background: transparent;
+      color: #0b2b5c;
+      padding: 14px 44px;
+      border-radius: 60px;
+      font-weight: 600;
+      text-decoration: none;
+      border: 1.5px solid #b8cef0;
+      transition: border 0.2s, background 0.2s;
+      display: inline-block;
+    }
+    .btn-outline:hover {
+      border-color: #1a6aff;
+      background: rgba(26, 106, 255, 0.04);
+    }
+
+    /* ----- sections general ----- */
+    section {
+      padding: 90px 0;
+    }
+    .section-title {
+      font-size: 2.6rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+      color: #0b1a33;
+    }
+    .section-subtitle {
+      font-size: 1.15rem;
+      color: #3f5a7f;
+      max-width: 600px;
+      margin-bottom: 50px;
+    }
+
+    /* features */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 40px;
+    }
+    .feature-card {
+      background: white;
+      padding: 36px 28px;
+      border-radius: 28px;
+      box-shadow: 0 12px 40px rgba(0, 30, 70, 0.05);
+      transition: transform 0.25s, box-shadow 0.25s;
+      border: 1px solid rgba(26, 106, 255, 0.04);
+    }
+    .feature-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 28px 60px rgba(26, 106, 255, 0.10);
+    }
+    .feature-icon {
+      font-size: 2.8rem;
+      color: #1a6aff;
+      margin-bottom: 16px;
+    }
+    .feature-card h3 {
+      font-size: 1.4rem;
+      margin-bottom: 10px;
+    }
+    .feature-card p {
+      color: #3f5a7f;
+    }
+
+    /* stats */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 30px;
+      text-align: center;
+    }
+    .stat-item {
+      background: white;
+      padding: 32px 16px;
+      border-radius: 40px;
+      box-shadow: 0 8px 24px rgba(0, 30, 70, 0.04);
+      transition: transform 0.2s;
+    }
+    .stat-item:hover {
+      transform: scale(1.02);
+    }
+    .stat-number {
+      font-size: 2.8rem;
+      font-weight: 800;
+      color: #0b2b5c;
+    }
+    .stat-label {
+      color: #4a6a92;
+      font-weight: 500;
+    }
+
+    /* testimonials */
+    .testimonial-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 30px;
+    }
+    .testimonial-card {
+      background: white;
+      padding: 32px 26px;
+      border-radius: 28px;
+      box-shadow: 0 8px 28px rgba(0, 30, 70, 0.04);
+      transition: transform 0.2s;
+      border: 1px solid rgba(26, 106, 255, 0.03);
+    }
+    .testimonial-card:hover {
+      transform: translateY(-6px);
+    }
+    .testimonial-card i {
+      color: #1a6aff;
+      font-size: 1.4rem;
+      opacity: 0.5;
+      margin-bottom: 8px;
+    }
+    .testimonial-card p {
+      font-style: italic;
+      color: #1f3a6b;
+    }
+    .testimonial-author {
+      margin-top: 16px;
+      font-weight: 600;
+      color: #0b2b5c;
+    }
+
+    /* FAQ */
+    .faq-list {
+      max-width: 780px;
+      margin: 0 auto;
+    }
+    .faq-item {
+      background: white;
+      border-radius: 20px;
+      padding: 20px 28px;
+      margin-bottom: 16px;
+      box-shadow: 0 4px 12px rgba(0, 30, 70, 0.02);
+      border: 1px solid rgba(0, 60, 150, 0.04);
+      transition: box-shadow 0.2s;
+    }
+    .faq-item:hover {
+      box-shadow: 0 12px 32px rgba(26, 106, 255, 0.06);
+    }
+    .faq-question {
+      display: flex;
+      justify-content: space-between;
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: #0b1a33;
+      cursor: pointer;
+    }
+    .faq-question i {
+      color: #1a6aff;
+      transition: transform 0.25s;
+    }
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, padding 0.2s;
+      color: #3f5a7f;
+    }
+    .faq-answer.open {
+      max-height: 200px;
+      padding-top: 14px;
+    }
+
+    /* CTA */
+    .cta-section {
+      background: linear-gradient(145deg, #0b2b5c, #1a4b9e);
+      border-radius: 60px;
+      padding: 70px 40px;
+      text-align: center;
+      color: white;
+      margin: 20px 0 40px;
+    }
+    .cta-section h2 {
+      font-size: 2.6rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+    .cta-section p {
+      font-size: 1.2rem;
+      opacity: 0.8;
+      max-width: 500px;
+      margin: 0 auto 36px;
+    }
+    .cta-section .btn-primary {
+      background: white;
+      color: #0b2b5c;
+      box-shadow: 0 8px 28px rgba(0, 0, 0, 0.15);
+    }
+    .cta-section .btn-primary:hover {
+      background: #f0f7ff;
+      transform: translateY(-2px);
+    }
+
+    /* footer */
+    footer {
+      padding: 50px 0 30px;
+      border-top: 1px solid rgba(26, 106, 255, 0.08);
+    }
+    .footer-grid {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 30px;
+    }
+    .footer-copy {
+      color: #3f5a7f;
+      font-size: 0.95rem;
+    }
+    .footer-social a {
+      color: #1f3a6b;
+      margin-left: 20px;
+      font-size: 1.3rem;
+      transition: color 0.2s;
+    }
+    .footer-social a:hover {
+      color: #1a6aff;
+    }
+
+    /* scroll animations (reveal) */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* responsive */
+    @media (max-width: 900px) {
+      .hero h1 { font-size: 2.8rem; }
+      .section-title { font-size: 2.2rem; }
+    }
+
+    @media (max-width: 720px) {
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        background: white;
+        position: absolute;
+        top: 75px;
+        left: 0;
+        right: 0;
+        padding: 30px 24px;
+        gap: 20px;
+        box-shadow: 0 24px 40px rgba(0, 0, 0, 0.04);
+        border-radius: 0 0 28px 28px;
+        border-top: 1px solid #eef5ff;
+      }
+      .nav-links.open {
+        display: flex;
+      }
+      .menu-toggle {
+        display: block;
+      }
+      .hero h1 { font-size: 2.3rem; }
+      .cta-section { padding: 40px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="container nav-wrapper">
+    <div class="logo"><i class="fas fa-bolt"></i>Nex<span>ify</span></div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#features">Features</a></li>
+      <li><a href="#stats">Stats</a></li>
+      <li><a href="#testimonials">Testimonials</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="#cta" class="nav-cta">Get started</a></li>
+    </ul>
+    <button class="menu-toggle" id="menuToggle" aria-label="menu"><i class="fas fa-bars"></i></button>
+  </div>
+</nav>
+
+<main>
+  <!-- hero -->
+  <section class="hero container reveal" id="hero">
+    <h1>Build the future, <br>faster than ever</h1>
+    <p>Nexify brings AI-powered collaboration, analytics, and automation — all in one sleek platform.</p>
+    <div class="hero-buttons">
+      <a href="#" class="btn-primary">Start free trial</a>
+      <a href="#" class="btn-outline"><i class="fas fa-play" style="margin-right: 8px;"></i>Watch demo</a>
+    </div>
+  </section>
+
+  <!-- features -->
+  <section id="features" class="container reveal">
+    <h2 class="section-title">Designed for teams</h2>
+    <p class="section-subtitle">Everything you need to ship products, delight users, and grow.</p>
+    <div class="features-grid">
+      <div class="feature-card"><div class="feature-icon"><i class="fas fa-cloud-upload-alt"></i></div><h3>Sync instantly</h3><p>Real-time collaboration with zero latency, anywhere in the world.</p></div>
+      <div class="feature-card"><div class="feature-icon"><i class="fas fa-chart-line"></i></div><h3>Smart insights</h3><p>AI-driven analytics that turn data into decisions, automatically.</p></div>
+      <div class="feature-card"><div class="feature-icon"><i class="fas fa-shield-alt"></i></div><h3>Enterprise security</h3><p>Bank-grade encryption and compliance baked in from day one.</p></div>
+      <div class="feature-card"><div class="feature-icon"><i class="fas fa-code-branch"></i></div><h3>Workflow automation</h3><p>Connect your tools and automate repetitive tasks in minutes.</p></div>
+    </div>
+  </section>
+
+  <!-- stats -->
+  <section id="stats" class="container reveal">
+    <h2 class="section-title">Trusted by innovators</h2>
+    <p class="section-subtitle">Real numbers from real teams.</p>
+    <div class="stats-grid">
+      <div class="stat-item"><div class="stat-number" data-count="12000">0</div><div class="stat-label">Active users</div></div>
+      <div class="stat-item"><div class="stat-number" data-count="4.9">0</div><div class="stat-label">Avg. rating</div></div>
+      <div class="stat-item"><div class="stat-number" data-count="85">0</div><div class="stat-label">Countries</div></div>
+      <div class="stat-item"><div class="stat-number" data-count="99.9">0</div><div class="stat-label">Uptime %</div></div>
+    </div>
+  </section>
+
+  <!-- testimonials -->
+  <section id="testimonials" class="container reveal">
+    <h2 class="section-title">What our users say</h2>
+    <p class="section-subtitle">Real stories from real people.</p>
+    <div class="testimonial-grid">
+      <div class="testimonial-card"><i class="fas fa-quote-left"></i><p>“Nexify cut our meeting time in half. We finally have a single source of truth.”</p><div class="testimonial-author">— Emma R., Product Lead</div></div>
+      <div class="testimonial-card"><i class="fas fa-quote-left"></i><p>“The analytics dashboard is magical. We discovered revenue opportunities we missed.”</p><div class="testimonial-author">— Marcus T., CEO</div></div>
+      <div class="testimonial-card"><i class="fas fa-quote-left"></i><p>“Onboarding took 10 minutes. My whole team loves the clean UI.”</p><div class="testimonial-author">— Sophie L., Design Ops</div></div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="container reveal">
+    <h2 class="section-title">Frequently asked</h2>
+    <p class="section-subtitle">Quick answers to common questions.</p>
+    <div class="faq-list">
+      <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)"><span>Is there a free tier?</span><i class="fas fa-chevron-down"></i></div><div class="faq-answer">Yes, we offer a generous free plan for up to 10 users with core features.</div></div>
+      <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)"><span>Can I cancel anytime?</span><i class="fas fa-chevron-down"></i></div><div class="faq-answer">Absolutely. No lock-in, cancel or upgrade with one click.</div></div>
+      <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)"><span>Is my data secure?</span><i class="fas fa-chevron-down"></i></div><div class="faq-answer">We use end-to-end encryption and comply with GDPR & SOC2.</div></div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section id="cta" class="container reveal">
+    <div class="cta-section">
+      <h2>Ready to accelerate?</h2>
+      <p>Join thousands of teams building with Nexify.</p>
+      <a href="#" class="btn-primary">Start free trial →</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container footer-grid">
+    <div class="footer-copy">© 2026 Nexify · All rights reserved</div>
+    <div class="footer-social">
+      <a href="#" aria-label="twitter"><i class="fab fa-twitter"></i></a>
+      <a href="#" aria-label="github"><i class="fab fa-github"></i></a>
+      <a href="#" aria-label="linkedin"><i class="fab fa-linkedin-in"></i></a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ----- mobile menu toggle -----
+  const toggleBtn = document.getElementById('menuToggle');
+  const navLinks = document.getElementById('navLinks');
+  toggleBtn.addEventListener('click', () => {
+    navLinks.classList.toggle('open');
+  });
+  // close on link click (optional)
+  document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', () => navLinks.classList.remove('open'));
+  });
+
+  // ----- FAQ toggle -----
+  function toggleFaq(el) {
+    const answer = el.parentElement.querySelector('.faq-answer');
+    const icon = el.querySelector('i');
+    if (answer.classList.contains('open')) {
+      answer.classList.remove('open');
+      icon.style.transform = 'rotate(0deg)';
+    } else {
+      answer.classList.add('open');
+      icon.style.transform = 'rotate(180deg)';
+    }
+  }
+
+  // ----- scroll animations (reveal) + stats counter -----
+  const revealElements = document.querySelectorAll('.reveal');
+  const statNumbers = document.querySelectorAll('.stat-number');
+  let countersStarted = false;
+
+  function isInView(el) {
+    const rect = el.getBoundingClientRect();
+    return rect.top < window.innerHeight - 60 && rect.bottom > 40;
+  }
+
+  function handleReveal() {
+    revealElements.forEach(el => {
+      if (isInView(el)) el.classList.add('visible');
+    });
+
+    // stats counter (once)
+    const statsSection = document.getElementById('stats');
+    if (statsSection && isInView(statsSection) && !countersStarted) {
+      countersStarted = true;
+      statNumbers.forEach(stat => {
+        const target = parseFloat(stat.dataset.count);
+        const isFloat = target % 1 !== 0;
+        let current = 0;
+        const increment = target / 45;
+        const timer = setInterval(() => {
+          current += increment;
+          if (current >= target) {
+            current = target;
+            clearInterval(timer);
+          }
+          stat.textContent = isFloat ? current.toFixed(1) : Math.floor(current);
+        }, 25);
+      });
+    }
+  }
+
+  window.addEventListener('scroll', handleReveal);
+  window.addEventListener('load', () => {
+    handleReveal();
+    // ensure hero visible
+    document.querySelector('.hero')?.classList.add('visible');
+    // pre-open first faq for demo
+    const firstFaq = document.querySelector('.faq-item .faq-answer');
+    if (firstFaq) {
+      firstFaq.classList.add('open');
+      const icon = firstFaq.parentElement.querySelector('.faq-question i');
+      if (icon) icon.style.transform = 'rotate(180deg)';
+    }
+  });
+
+  // smooth anchor scroll (native)
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      const href = this.getAttribute('href');
+      if (href === "#") return;
+      const target = document.querySelector(href);
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+</script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meine Webseite</title>
+    
+    <!-- CSS verlinken -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    
+    <!-- HTML Inhalt hier -->
+    <h1>Hallo Welt</h1>
+    
+    <!-- JavaScript verlinken (am Ende vom body) -->
+    <script src="script.js"></script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexify · Modern Startup Landing Page</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- ========== NAVIGATION ========== -->
+<nav id="navbar">
+    <div class="container nav-wrapper">
+        <div class="logo">
+            <i class="fas fa-bolt"></i>Nex<span>ify</span>
+        </div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#features">Features</a></li>
+            <li><a href="#stats">Statistiken</a></li>
+            <li><a href="#testimonials">Testimonials</a></li>
+            <li><a href="#faq">FAQ</a></li>
+            <li><a href="#cta" class="nav-cta">Los geht's</a></li>
+        </ul>
+        <button class="menu-toggle" id="menuToggle" aria-label="Menü">
+            <i class="fas fa-bars"></i>
+        </button>
+    </div>
+</nav>
+
+<!-- ========== HERO SECTION ========== -->
+<section class="hero reveal" id="hero">
+    <div class="container">
+        <div class="hero-content">
+            <div class="hero-badge">
+                <i class="fas fa-rocket"></i> Neu: AI-Powered Analytics
+            </div>
+            <h1>
+                Die Zukunft der <br>
+                <span class="gradient-text">Zusammenarbeit</span>
+            </h1>
+            <p>
+                Nexify verbindet KI-gestützte Analysen, Echtzeit-Kollaboration 
+                und Automation – alles in einer schlanken Plattform.
+            </p>
+            <div class="hero-buttons">
+                <a href="#" class="btn-primary">
+                    <i class="fas fa-gem"></i> Kostenlos starten
+                </a>
+                <a href="#" class="btn-outline">
+                    <i class="fas fa-play-circle"></i> Demo ansehen
+                </a>
+            </div>
+            <div class="hero-stats-mini">
+                <span><i class="fas fa-check-circle"></i> 14 Tage gratis</span>
+                <span><i class="fas fa-check-circle"></i> Keine Kreditkarte</span>
+                <span><i class="fas fa-check-circle"></i> Jederzeit kündbar</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== FEATURES ========== -->
+<section id="features" class="reveal">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-tag">Features</span>
+            <h2 class="section-title">Alles was du brauchst, <br>um zu wachsen</h2>
+            <p class="section-subtitle">
+                Unsere Plattform kombiniert modernste Technologie mit 
+                intuitivem Design für Teams jeder Größe.
+            </p>
+        </div>
+        
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                </div>
+                <h3>Echtzeit-Sync</h3>
+                <p>Zusammenarbeit ohne Verzögerung – egal ob im Büro oder von unterwegs.</p>
+                <a href="#" class="feature-link">Mehr erfahren →</a>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h3>KI-Analysen</h3>
+                <p>Automatische Insights aus deinen Daten – keine manuelle Auswertung nötig.</p>
+                <a href="#" class="feature-link">Mehr erfahren →</a>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3>Enterprise-Sicherheit</h3>
+                <p>Banken-Verschlüsselung und Compliance für maximale Datensicherheit.</p>
+                <a href="#" class="feature-link">Mehr erfahren →</a>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-code-branch"></i>
+                </div>
+                <h3>Workflow-Automation</h3>
+                <p>Verbinde deine Tools und automatisiere wiederkehrende Aufgaben.</p>
+                <a href="#" class="feature-link">Mehr erfahren →</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== STATISTICS ========== -->
+<section id="stats" class="reveal stats-section">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-tag">Zahlen</span>
+            <h2 class="section-title">Vertrauen durch <br>messbare Ergebnisse</h2>
+        </div>
+        
+        <div class="stats-grid">
+            <div class="stat-item">
+                <div class="stat-number" data-count="12000">0</div>
+                <div class="stat-label">Aktive Nutzer</div>
+                <div class="stat-trend"><i class="fas fa-arrow-up"></i> +23% diesen Monat</div>
+            </div>
+            
+            <div class="stat-item">
+                <div class="stat-number" data-count="4.9">0</div>
+                <div class="stat-label">Durchschnittsbewertung</div>
+                <div class="stat-trend"><i class="fas fa-star"></i> 5-Sterne-Bewertungen</div>
+            </div>
+            
+            <div class="stat-item">
+                <div class="stat-number" data-count="85">0</div>
+                <div class="stat-label">Länder weltweit</div>
+                <div class="stat-trend"><i class="fas fa-globe"></i> Globales Team</div>
+            </div>
+            
+            <div class="stat-item">
+                <div class="stat-number" data-count="99.9">0</div>
+                <div class="stat-label">Uptime %</div>
+                <div class="stat-trend"><i class="fas fa-check-circle"></i> 99,9% Verfügbarkeit</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== TESTIMONIALS ========== -->
+<section id="testimonials" class="reveal">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-tag">Testimonials</span>
+            <h2 class="section-title">Was unsere Nutzer <br>über uns sagen</h2>
+        </div>
+        
+        <div class="testimonial-grid">
+            <div class="testimonial-card">
+                <div class="testimonial-rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <p>"Nexify hat unsere Meeting-Zeit halbiert. Endlich haben wir eine zentrale Quelle der Wahrheit."</p>
+                <div class="testimonial-author">
+                    <img src="https://ui-avatars.com/api/?name=Emma+R&background=1a6aff&color=fff&size=40" alt="Emma R.">
+                    <div>
+                        <strong>Emma R.</strong>
+                        <span>Product Lead bei TechCorp</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="testimonial-card">
+                <div class="testimonial-rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <p>"Die Analyse-Dashboards sind magisch. Wir haben Umsatzpotenziale entdeckt, die wir vorher verpasst haben."</p>
+                <div class="testimonial-author">
+                    <img src="https://ui-avatars.com/api/?name=Marcus+T&background=1a6aff&color=fff&size=40" alt="Marcus T.">
+                    <div>
+                        <strong>Marcus T.</strong>
+                        <span>CEO bei DataFlow</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="testimonial-card">
+                <div class="testimonial-rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <p>"Onboarding in 10 Minuten. Mein gesamtes Team liebt das saubere und intuitive Interface."</p>
+                <div class="testimonial-author">
+                    <img src="https://ui-avatars.com/api/?name=Sophie+L&background=1a6aff&color=fff&size=40" alt="Sophie L.">
+                    <div>
+                        <strong>Sophie L.</strong>
+                        <span>Design Ops bei CreativeLab</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== FAQ ========== -->
+<section id="faq" class="reveal faq-section">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-tag">FAQ</span>
+            <h2 class="section-title">Häufig gestellte <br>Fragen</h2>
+            <p class="section-subtitle">Alles was du über Nexify wissen musst.</p>
+        </div>
+        
+        <div class="faq-list">
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span>Gibt es einen kostenlosen Tarif?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    Ja! Wir bieten einen großzügigen kostenlosen Tarif für bis zu 10 Nutzer mit allen Kernfunktionen.
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span>Kann ich jederzeit kündigen?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    Absolut. Keine Vertragsbindung. Kündige oder upgrade mit einem Klick.
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span>Wie sicher sind meine Daten?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    Wir verwenden Ende-zu-Ende-Verschlüsselung und sind GDPR & SOC2-konform.
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span>Bietet ihr Support für Teams?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    Ja! Wir bieten 24/7 Support, Dedicated Account Manager und individuelle Onboarding-Sessions.
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== CTA ========== -->
+<section id="cta" class="reveal">
+    <div class="container">
+        <div class="cta-section">
+            <div class="cta-content">
+                <h2>Bereit, durchzustarten? 🚀</h2>
+                <p>Schließe dich tausenden Teams an, die mit Nexify wachsen.</p>
+                <div class="cta-buttons">
+                    <a href="#" class="btn-primary btn-large">
+                        <i class="fas fa-gem"></i> Jetzt kostenlos starten
+                    </a>
+                    <a href="#" class="btn-outline btn-large btn-white-outline">
+                        <i class="fas fa-calendar-alt"></i> Demo buchen
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== FOOTER ========== -->
+<footer>
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <div class="logo">
+                    <i class="fas fa-bolt"></i>Nex<span>ify</span>
+                </div>
+                <p>Die intelligente Plattform für moderne Teams.</p>
+            </div>
+            
+            <div class="footer-links">
+                <div class="footer-column">
+                    <h4>Produkt</h4>
+                    <a href="#">Features</a>
+                    <a href="#">Preise</a>
+                    <a href="#">Updates</a>
+                </div>
+                <div class="footer-column">
+                    <h4>Unternehmen</h4>
+                    <a href="#">Über uns</a>
+                    <a href="#">Karriere</a>
+                    <a href="#">Blog</a>
+                </div>
+                <div class="footer-column">
+                    <h4>Support</h4>
+                    <a href="#">Hilfe-Center</a>
+                    <a href="#">Kontakt</a>
+                    <a href="#">Status</a>
+                </div>
+            </div>
+            
+            <div class="footer-social">
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <span>© 2026 Nexify. Alle Rechte vorbehalten.</span>
+            <div>
+                <a href="#">Datenschutz</a>
+                <a href="#">AGB</a>
+                <a href="#">Impressum</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
