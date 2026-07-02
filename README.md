@@ -1,3 +1,5 @@
+## 🔗 Live Demo
+ **Live Demo](https://daviiliev.github.io/nexify-landing-page/)**
 # 🚀 Nexify – Premium Landing Page
 
 A modern, fully responsive landing page for startups. Built with **Vanilla HTML, CSS & JavaScript**.
